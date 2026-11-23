@@ -1,19 +1,20 @@
-import { Button } from "@/components/ui/button";
-import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/components/theme-provider"
-import { toast } from "sonner";
-import {ModeToggle} from "./components/mode-toggle"
-import { AuthProvider } from "@/contexts/AuthContext";
+import { BrowserRouter } from 'react-router-dom';
+import { Toaster } from 'sonner';
+import { ThemeProvider } from '@/components/theme-provider';
+import { AuthProvider } from '@/hooks/useAuth';
+import AppRoutes from '@/pages/AppRoutes';
 
-function App() {
-  
+// -----------------------------------------------------------------------------
+// Application providers and route tree
+// -----------------------------------------------------------------------------
+
+export default function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div className="ml-10">
-        <ModeToggle/>
-      </div>
-        </ThemeProvider>
-  )
+      <AuthProvider>
+        <BrowserRouter><AppRoutes /></BrowserRouter>
+        <Toaster richColors position="top-right" />
+      </AuthProvider>
+    </ThemeProvider>
+  );
 }
-
-export default App
